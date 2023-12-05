@@ -1,7 +1,11 @@
 <script>
 import { store } from "../store.js";
 export default {
-    store
+    data() {
+        return {
+            store,
+        }
+    }
 }
 </script>
 <template>
@@ -10,7 +14,7 @@ export default {
             <div class="row">
                 <div class="col-12 d-flex justify-content-between p-3">
                     <h1>Boolflix</h1>
-                    <input v-model="store.searchInput" type="text" placeholder="cerca">
+                    <input v-model="store.searchInput" @keyup.enter="$emit('search')" type="text" placeholder="cerca">
                 </div>
             </div>
         </div>
