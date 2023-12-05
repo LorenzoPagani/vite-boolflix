@@ -62,8 +62,7 @@ export default {
     }
 }
 
-/* api key: 41dd003286f60b469c36b0d8ff355f65 
-access token: eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0MWRkMDAzMjg2ZjYwYjQ2OWMzNmIwZDhmZjM1NWY2NSIsInN1YiI6IjY1NmVkY2VjODg2MzQ4MDBjOWUyYzM4YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.4H-JapxVCb6usROrLw6E2EP2oy7tYrrtThkISi8jb2M*/
+
 </script>
 
 <template>

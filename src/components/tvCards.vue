@@ -28,18 +28,22 @@ export default {
                     <h2>Series</h2>
                 </div>
                 <div class="col-12 movie-wrapper">
-                    <div v-for="show in store.tvList" class="card m-3">
-                        <img class="card-img-top poster" :src="`https://image.tmdb.org/t/p/w342/${show.poster_path}`"
-                            alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ show.name }}</h5>
-                            <h6 class="card-subtitle mb-2  ">Titolo originale: {{ show.original_name }}</h6>
-                            <h6 class="card-subtitle mb-2  ">Lingua originale: {{ show.original_language }}</h6>
-                            <i v-for="index in getStars(show.vote_average)" class="fa-solid fa-star" aria-hidden="true"></i>
-                            <i v-for="index in (5 - getStars(show.vote_average))" class="fa-regular fa-star"></i>
-                            <img :src="getflag(show.original_language)" alt="flag">
-                            <p class="card-text">{{ show.overview }}</p>
-
+                    <div v-for="show in store.tvList" class="flip-card m-3">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <img class="card-img-top poster"
+                                    :src="`https://image.tmdb.org/t/p/w342/${show.poster_path}`" alt="Card image cap">
+                            </div>
+                            <div class="flip-card-back">
+                                <h5 class="card-title">{{ show.name }}</h5>
+                                <h6 class="card-subtitle mb-2  ">Titolo originale: {{ show.original_name }}</h6>
+                                <h6 class="card-subtitle mb-2  ">Lingua originale: {{ show.original_language }}</h6>
+                                <i v-for="index in getStars(show.vote_average)" class="fa-solid fa-star"
+                                    aria-hidden="true"></i>
+                                <i v-for="index in (5 - getStars(show.vote_average))" class="fa-regular fa-star"></i>
+                                <img :src="getflag(show.original_language)" alt="flag">
+                                <p class="card-text">{{ show.overview }}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -54,27 +58,61 @@ img {
 
 .poster {
     width: 100%;
-    height: 40%;
+    height: 100%;
     object-fit: contain;
     object-position: center;
+    border-radius: 20px;
 }
 
-.card {
+.flip-card {
     min-height: 450px;
     width: 300px;
-
-    background-color: rgb(39, 37, 35);
     color: whitesmoke;
+    perspective: 1000px;
+
 }
 
-.card-body {
-    height: 60%;
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.flip-card-front {
+    background-color: rgb(39, 37, 35);
+    color: white;
+    border-radius: 20px;
+}
+
+
+.flip-card-back {
+    background-color: rgb(39, 37, 35);
+    color: white;
+    transform: rotateY(180deg);
+    border-radius: 20px;
+    padding: 10px;
     overflow-y: auto;
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
 
-.card-body::-webkit-scrollbar {
+.flip-card-back::-webkit-scrollbar {
     display: none;
 }
 
