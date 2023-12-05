@@ -21,17 +21,17 @@ export default {
     <main>
         <div class="container">
             <div class="row">
-                <div v-if="store.movieList.length > 0" class="col-12 mt-5">
-                    <h2>Movies</h2>
+                <div v-if="store.tvList.length > 0" class="col-12 mt-5">
+                    <h2>Series</h2>
                 </div>
                 <div class="col-12 movie-wrapper">
-                    <div v-for="movie in store.movieList" class="card m-3">
+                    <div v-for="show in store.tvList" class="card m-3">
                         <div class="card-body">
-                            <h5 class="card-title">{{ movie.title }}</h5>
-                            <h6 class="card-subtitle mb-2  ">Titolo originale: {{ movie.original_title }}</h6>
-                            <h6 class="card-subtitle mb-2  ">Lingua originale: {{ movie.original_language }}</h6>
-                            <img :src="getflag(movie.original_language)" alt="flag">
-                            <p class="card-text">{{ movie.overview }}</p>
+                            <h5 class="card-title">{{ show.name }}</h5>
+                            <h6 class="card-subtitle mb-2  ">Titolo originale: {{ show.original_name }}</h6>
+                            <h6 class="card-subtitle mb-2  ">Lingua originale: {{ show.original_language }}</h6>
+                            <img :src="getflag(show.original_language)" alt="flag">
+                            <p class="card-text">{{ show.overview }}</p>
 
                         </div>
                     </div>
