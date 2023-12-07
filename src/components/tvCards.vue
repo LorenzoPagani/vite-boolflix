@@ -10,7 +10,6 @@ export default {
     },
     methods: {
         getflag(lang) {
-            console.log(import.meta.url);
             return new URL(`../assets/flags/${lang}.svg`, import.meta.url).href
 
         },

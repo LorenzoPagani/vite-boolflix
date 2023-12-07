@@ -14,19 +14,23 @@ export default {
         },
         getStars(vote) {
             return Math.ceil(vote / 2)
-        }
+        },
+
+
+
     }
 }
 </script>
 <template>
     <main>
         <div class="container">
+
             <div class="row">
-                <div v-if="store.movieList.length > 0" class="col-12 mt-5">
+                <div v-if="store.movieList.length" class="col-12 mt-5">
                     <h2 class="text-white">Movies</h2>
                 </div>
                 <div class="col-12 movie-wrapper">
-                    <div v-for="movie in store.movieList" class=" flip-card m-3">
+                    <div v-for="(movie, i) in store.movieList" class=" flip-card m-3">
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
                                 <img class="card-img-top poster"
@@ -42,6 +46,14 @@ export default {
                                     aria-hidden="true"></i>
                                 <i v-for="index in (5 - getStars(movie.vote_average))" class="fa-regular fa-star"></i>
                                 <img :src="getflag(movie.original_language)" alt="flag">
+                                <button @click="getCast(movie.id)"></button>
+                                <p v-for="actor in store.fiveActors[i]">{{ actor }}</p>
+                                <!--  <p v-for="actor in store.movieCast[i]">{{ actor.name }}</p> -->
+                                <!-- <p v-if="store.movieCast[i].length" v-for="n in 5">
+                                    <template v-if="store.movieCast[i][n - 1]">
+                                        {{ store.movieCast[i][n - 1].name }}
+                                    </template>
+                                </p> -->
                                 <p class="card-text">{{ movie.overview }}</p>
                             </div>
                         </div>
