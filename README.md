@@ -20,6 +20,6 @@ To get a local copy up and running, follow these simple steps:
     npm run dev
 
 
-##License
+## License
 
 Distributed under the MIT License.
