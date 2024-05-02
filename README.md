@@ -1,7 +1,25 @@
-# Vue 3 + Vite
+<!-- write readme -->
+# Movie and TV Show Catalogue
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## Description
 
-## Recommended IDE Setup
+This is a Vue.js application that displays a catalogue of movies and TV shows. The data is fetched from an external API.
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+## Installation
+
+To get a local copy up and running, follow these simple steps:
+
+```bash
+# Clone the repository
+git clone https://github.com/LorenzoPagani/vite-boolflix.git
+
+# Install dependencies
+npm install
+
+# Start the application
+npm run dev
+
+
+##License
+
+Distributed under the MIT License.
