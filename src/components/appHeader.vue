@@ -13,8 +13,12 @@ export default {
         <div class="container">
             <div class="row">
                 <div class="col-12 d-flex justify-content-between p-3">
-                    <h1>Boolflix</h1>
-                    <input v-model="store.searchInput" @keyup.enter="$emit('search')" type="text" placeholder="cerca">
+                    <a href="/" class="text-decoration-none">
+                        <h1>Boolflix</h1>
+                    </a>
+
+                    <input class="rounded" v-model="store.searchInput" @keyup.enter="$emit('search')" type="text"
+                        placeholder="cerca">
                 </div>
             </div>
         </div>

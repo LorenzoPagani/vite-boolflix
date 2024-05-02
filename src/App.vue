@@ -1,4 +1,4 @@
-<script >
+<script>
 import { store } from './store.js'
 import appHeader from './components/appHeader.vue'
 import movieCards from './components/movieCards.vue'
@@ -104,7 +104,8 @@ export default {
 <template>
     <appHeader @search="() => { getMovies(); getTvShows(); }"></appHeader>
     <main>
-
+        <h1 class="text-center text-white mt-5" v-if="!store.movieList.length">Usa la barra di ricerca per trovare Film
+            e Serie TV!</h1>
         <movieCards></movieCards>
         <tvCards></tvCards>
     </main>

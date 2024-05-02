@@ -15,26 +15,43 @@ export default {
         getStars(vote) {
             return Math.ceil(vote / 2)
         },
-
-
+        FWDScroll() {
+            const container = document.getElementById("movie-container");
+            container.scrollTo({
+                left: container.scrollLeft + 1000,
+                behavior: 'smooth'
+            });
+        },
+        backScroll() {
+            const container = document.getElementById("movie-container");
+            container.scrollTo({
+                left: container.scrollLeft - 1000,
+                behavior: 'smooth'
+            });
+        },
 
     }
 }
 </script>
 <template>
     <main>
-        <div class="container">
+        <div class="container-fluid">
 
             <div class="row">
                 <div v-if="store.movieList.length" class="col-12 mt-5">
-                    <h2 class="text-white">Movies</h2>
+                    <h2 class="text-white text-center">Movies</h2>
                 </div>
-                <div class="col-12 movie-wrapper">
+                <div class="col-1 d-flex align-items-center justify-content-center">
+                    <button class="btn btn-outline-danger d-none d-md-block" @click="backScroll"
+                        v-if="store.movieList.length"><i class="fa-solid fa-caret-left"></i></button>
+                </div>
+                <div id="movie-container" class="col-10 movie-wrapper overflow-md-hidden">
                     <div v-for="(movie, i) in store.movieList" class=" flip-card m-3">
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
                                 <img class="card-img-top poster"
-                                    :src="`https://image.tmdb.org/t/p/w342/${movie.poster_path}`" alt="Card image cap">
+                                    :src="`https://image.tmdb.org/t/p/w342/${movie.poster_path}`"
+                                    :alt="`${movie.title}`">
 
                             </div>
                             <div class="flip-card-back">
@@ -42,22 +59,32 @@ export default {
                                 <h5 class="card-title">{{ movie.title }}</h5>
                                 <h6 class="card-subtitle mb-2  ">Titolo originale: {{ movie.original_title }}</h6>
                                 <h6 class="card-subtitle mb-2  ">Lingua originale: {{ movie.original_language }}</h6>
-                                <i v-for="index in getStars(movie.vote_average)" class="fa-solid fa-star"
+                                <i v-for="index in getStars(movie.vote_average)" class="text-warning  fa-solid fa-star"
                                     aria-hidden="true"></i>
-                                <i v-for="index in (5 - getStars(movie.vote_average))" class="fa-regular fa-star"></i>
+                                <i v-for="index in (5 - getStars(movie.vote_average))"
+                                    class="text-warning fa-regular fa-star"></i>
                                 <img :src="getflag(movie.original_language)" alt="flag">
                                 <button @click="getCast(movie.id)"></button>
-                                <p v-for="actor in store.fiveActors[i]">{{ actor }}</p>
+                                <div class="mb-3">
+
+                                    <li class="list-unstyled" v-for="actor in store.fiveActors[i]">{{ actor }} </li>
+                                </div>
+
+
                                 <!--  <p v-for="actor in store.movieCast[i]">{{ actor.name }}</p> -->
                                 <!-- <p v-if="store.movieCast[i].length" v-for="n in 5">
                                     <template v-if="store.movieCast[i][n - 1]">
                                         {{ store.movieCast[i][n - 1].name }}
                                     </template>
-                                </p> -->
+</p> -->
                                 <p class="card-text">{{ movie.overview }}</p>
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="col-1 d-flex align-items-center justify-content-center">
+                    <button class="btn btn-outline-danger d-none d-md-block" v-if="store.movieList.length"
+                        @click="FWDScroll"><i class="fa-solid fa-caret-right"></i></button>
                 </div>
             </div>
         </div>
@@ -136,9 +163,16 @@ p {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    overflow-x: auto;
-    overflow-y: hidden;
-    width: 100%;
+    overflow: auto;
+    transition: 2s;
     max-height: 500px;
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.movie-wrapper::-webkit-scrollbar {
+    display: none;
 }
 </style>
