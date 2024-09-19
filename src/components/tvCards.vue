@@ -42,7 +42,7 @@ export default {
                 </div>
                 <div class="col-1 d-flex align-items-center justify-content-center">
                     <button class="btn btn-outline-danger d-none d-md-block" @click="backScroll"
-                        v-if="store.movieList.length"><i class="fa-solid fa-caret-left"></i></button>
+                        v-if="store.tvList.length"><i class="fa-solid fa-caret-left"></i></button>
                 </div>
                 <div id="series-container" class="col-10 movie-wrapper">
                     <div v-for="show in store.tvList" class="flip-card m-3">
@@ -65,7 +65,7 @@ export default {
                     </div>
                 </div>
                 <div class="col-1 d-flex align-items-center justify-content-center">
-                    <button class="btn btn-outline-danger d-none d-md-block" v-if="store.movieList.length"
+                    <button class="btn btn-outline-danger d-none d-md-block" v-if="store.tvList.length"
                         @click="FWDScroll"><i class="fa-solid fa-caret-right"></i></button>
                 </div>
             </div>
