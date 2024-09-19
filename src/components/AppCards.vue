@@ -1,12 +1,17 @@
 <script>
 import { store } from '../store';
-
 export default {
+    props: ['movies', 'title'],
     data() {
         return {
             store,
-
+            container: null,
         }
+    },
+    mounted() {
+        this.container = this.$refs.container
+        console.log(store.fiveActors);
+
     },
     methods: {
         getflag(lang) {
@@ -16,16 +21,14 @@ export default {
             return Math.ceil(vote / 2)
         },
         FWDScroll() {
-            const container = document.getElementById("movie-container");
-            container.scrollTo({
-                left: container.scrollLeft + 1000,
+            this.container.scrollTo({
+                left: this.container.scrollLeft + 1000,
                 behavior: 'smooth'
             });
         },
         backScroll() {
-            const container = document.getElementById("movie-container");
-            container.scrollTo({
-                left: container.scrollLeft - 1000,
+            this.container.scrollTo({
+                left: this.container.scrollLeft - 1000,
                 behavior: 'smooth'
             });
         },
@@ -36,18 +39,17 @@ export default {
 <template>
     <main>
         <div class="container-fluid">
-
             <div class="row">
-                <div v-if="store.movieList.length" class="col-12 mt-5">
-                    <h2 class="text-white text-center">Movies</h2>
+                <div v-if="movies.length" class="col-12 mt-5">
+                    <h2 class="text-white text-center">{{ title }}</h2>
                 </div>
                 <div class="col-1 d-flex align-items-center justify-content-center">
-                    <button class="btn btn-outline-danger d-none d-md-block" @click="backScroll"
-                        v-if="store.movieList.length"><i class="fa-solid fa-caret-left"></i></button>
+                    <button class="btn btn-outline-danger d-none d-md-block" @click="backScroll" v-if="movies.length"><i
+                            class="fa-solid fa-caret-left"></i></button>
                 </div>
-                <div id="movie-container" class="col-10 movie-wrapper overflow-md-hidden">
-                    <div v-for="(movie, i) in store.movieList" class=" flip-card m-3">
-                        <a :href="`https://www.google.com/search?q=${encodeURIComponent(movie.title)}%20streaming`"
+                <div ref="container" class="col-10 movie-wrapper overflow-md-hidden">
+                    <div v-for="(movie, i) in movies" class=" flip-card m-3">
+                        <a :href="`https://www.google.com/search?q=${encodeURIComponent(movie.title || movie.name)}%20streaming`"
                             target="_blank">
                             <div class="flip-card-inner">
                                 <div class="flip-card-front">
@@ -58,8 +60,11 @@ export default {
                                 </div>
                                 <div class="flip-card-back">
 
-                                    <h5 class="card-title">{{ movie.title }}</h5>
-                                    <h6 class="card-subtitle mb-2  ">Titolo originale: {{ movie.original_title }}</h6>
+                                    <h5 class="card-title">{{ movie.title || movie.name }}
+                                    </h5>
+
+                                    <h6 class="card-subtitle mb-2  ">Titolo
+                                        originale: {{ movie.original_title || movie.original_name }}</h6>
                                     <h6 class="card-subtitle mb-2  ">Lingua originale: {{ movie.original_language }}
                                     </h6>
                                     <i v-for="index in getStars(movie.vote_average)"
@@ -67,21 +72,12 @@ export default {
                                     <i v-for="index in (5 - getStars(movie.vote_average))"
                                         class="text-warning fa-regular fa-star"></i>
                                     <img :src="getflag(movie.original_language)" alt="flag">
-                                    <!--     <button @click="getCast(movie.id)"></button> -->
-                                    <div class="mb-3">
 
-                                        <li class="list-unstyled" v-for="actor in store.fiveActors[i]">{{ actor }} </li>
-                                    </div>
+                                    <li class="list-unstyled" v-for="actor in store.fiveActors[i]">{{ actor
+                                        }} </li>
 
-
-                                    <!--  <p v-for="actor in store.movieCast[i]">{{ actor.name }}</p> -->
-                                    <!-- <p v-if="store.movieCast[i].length" v-for="n in 5">
-                                    <template v-if="store.movieCast[i][n - 1]">
-                                        {{ store.movieCast[i][n - 1].name }}
-                                    </template>
-</p> -->
                                     <p class="card-text">{{ movie.overview }}</p>
-                                    <a :href="`https://www.youtube.com/results?search_query=${encodeURIComponent(movie.title)}%20trailer`"
+                                    <a :href="`https://www.youtube.com/results?search_query=${encodeURIComponent(movie.title || movie.name)}%20trailer`"
                                         target="_blank">
                                         <button class="btn btn-danger">guarda il trailer</button>
                                     </a>
@@ -92,8 +88,8 @@ export default {
                     </div>
                 </div>
                 <div class="col-1 d-flex align-items-center justify-content-center">
-                    <button class="btn btn-outline-danger d-none d-md-block" v-if="store.movieList.length"
-                        @click="FWDScroll"><i class="fa-solid fa-caret-right"></i></button>
+                    <button class="btn btn-outline-danger d-none d-md-block" v-if="movies.length" @click="FWDScroll"><i
+                            class="fa-solid fa-caret-right"></i></button>
                 </div>
             </div>
         </div>
